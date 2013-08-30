@@ -15,7 +15,6 @@ def getitem(M, k):
     3
     """
     assert k[0] in M.D[0] and k[1] in M.D[1]
-
     return M.f.get(k,0)
 
 
@@ -45,20 +44,17 @@ def add(A, B):
     True
     """
     assert A.D == B.D
-
     return Mat(A.D, {(r,c):(A[r,c]+B[r,c]) for r in A.D[0] for c in A.D[1]})
 
 
 def scalar_mul(M, alpha):
     "Returns the product of scalar alpha with M" 
-
     return Mat(M.D, {(r,c):alpha*M[r,c] for r in M.D[0] for c in M.D[1]})
 
 
 def equal(A, B):
     "Returns true iff A is equal to B"
     assert A.D == B.D
-
     return all({A[r,c]==B[r,c] for r in A.D[0] for c in A.D[1]})
 
 
@@ -85,14 +81,12 @@ def vector_matrix_mul(v, M):
     True
     """
     assert M.D[0] == v.D
-
     return Vec(M.D[1], {c:sum(v[r]*M[r,c] for r in M.D[0]) for c in M.D[1]})
 
 
 def matrix_vector_mul(M, v):
     "Returns the product of matrix M and vector v"
     assert M.D[1] == v.D
-
     return Vec(M.D[0], {r:sum(M[r,c]*v[c] for c in M.D[1]) for r in M.D[0]})
 
 
@@ -107,10 +101,8 @@ def matrix_matrix_mul(A, B):
     True
     
     """
-    assert A.D[1] == B.D[0]
-    
+    assert A.D[1] == B.D[0]    
     D = (A.D[0], B.D[1])
-
     return Mat(D, {(r,d): sum(A[r,c]*B[c,d] for c in A.D[1]) for r in D[0] for d in D[1]})
 
 

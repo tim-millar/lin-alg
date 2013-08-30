@@ -31,7 +31,8 @@ def neg(v):
     "Returns the negation of a vector"
     return scalar_mul(v,-1)
 
-##### NO NEED TO MODIFY BELOW HERE #####
+##############################
+
 class Vec:
     """
     A vector has two fields:

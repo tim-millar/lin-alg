@@ -1,8 +1,11 @@
+#!/usr/bin/env python
+
 from vec import Vec
 from mat import Mat
 
 def identity(D, one):
-  """Given a set D and the field's one, returns the DxD identity matrix
+  """
+  Given a set D and the field's one, returns the DxD identity matrix
   e.g.:
   
   >>> identity({0,1,2}, 1)
@@ -11,19 +14,22 @@ def identity(D, one):
   return Mat((D,D), {(d,d):1 for d in D})
 
 def keys(d):
-  """Given a dict, returns something that generates the keys; given a list,
+  """
+  Given a dict, returns something that generates the keys; given a list,
      returns something that generates the indices.  Intended for coldict2mat and rowdict2mat.
   """
   return d.keys() if isinstance(d, dict) else range(len(d))
 
 def value(d):
-  """Given either a dict or a list, returns one of the values.
+  """
+  Given either a dict or a list, returns one of the values.
      Intended for coldict2mat and rowdict2mat.
   """
   return next(iter(d.values())) if isinstance(d, dict) else d[0]
 
 def mat2rowdict(A):
-  """Given a matrix, return a dictionary mapping row labels of A to rows of A
+  """
+  Given a matrix, return a dictionary mapping row labels of A to rows of A
 	 e.g.:
 	 
      >>> M = Mat(({0, 1, 2}, {0, 1}), {(0, 1): 1, (2, 0): 8, (1, 0): 4, (0, 0): 3, (2, 1): -2})
@@ -35,7 +41,8 @@ def mat2rowdict(A):
   return {row:Vec(A.D[1], {col:A[row,col] for col in A.D[1]}) for row in A.D[0]}
 
 def mat2coldict(A):
-  """Given a matrix, return a dictionary mapping column labels of A to columns of A
+  """
+  Given a matrix, return a dictionary mapping column labels of A to columns of A
 	 e.g.:
 	 >>> M = Mat(({0, 1, 2}, {0, 1}), {(0, 1): 1, (2, 0): 8, (1, 0): 4, (0, 0): 3, (2, 1): -2})
 	 >>> mat2coldict(M)
@@ -75,8 +82,8 @@ def rowdict2mat(rowdict):
     Assumes row_dict is nonempty.
     If rowdict is a dictionary then its keys will be the row-labels of the Mat.
     If rowdict is a list then {0...len(rowdict)-1} will be the row-labels of the Mat.
+
     e.g.:
-    
     >>> A = {0:Vec({0,1},{0:1,1:2}),1:Vec({0,1},{0:3,1:4})}
     >>> B = [Vec({0,1},{0:1,1:2}),Vec({0,1},{0:3,1:4})]
     >>> mat2rowdict(rowdict2mat(A)) == A
@@ -90,9 +97,11 @@ def rowdict2mat(rowdict):
     return Mat((set(keys(rowdict)), col_labels), {(r,c):rowdict[r][c] for r in keys(rowdict) for c in col_labels})
 
 def listlist2mat(L):
-  """Given a list of lists of field elements, return a matrix whose ith row consists
+  """
+  Given a list of lists of field elements, return a matrix whose ith row consists
   of the elements of the ith list.  The row-labels are {0...len(L)}, and the
   column-labels are {0...len(L[0])}
+
   >>> A=listlist2mat([[10,20,30,40],[50,60,70,80]])
   >>> print(A)
   <BLANKLINE>
